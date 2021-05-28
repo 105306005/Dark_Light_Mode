@@ -5,7 +5,7 @@
 
 This project is a Dark and Light mode Example.
 
-<!-- <img src="https://maggiepractice.s3.amazonaws.com/quotegenerator2.gif" width="600" /> -->
+<img src="https://maggiepractice.s3.amazonaws.com/darklightmode.gif" width="600" />
 
 ## Technologies
 
