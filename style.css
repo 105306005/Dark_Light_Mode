@@ -183,7 +183,7 @@ p {
   color: var(--on-background);
 }
 
-/* Dark Mode Toggle */
+/* Dark Light Mode Toggle */
 .theme-switch-wrapper {
   display: flex;
   align-items: center;
