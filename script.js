@@ -12,35 +12,43 @@ function imageMode(theme) {
   image2.src = `img/undraw_feeling_proud_${theme}.svg`;
   image3.src = `img/undraw_conceptual_idea_${theme}.svg`;
 }
-
-//Dark Mode Style
-function darkMode() {
-  nav.style.backgroundColor = "rgb(0 0 0/ 50%)";
-  textBox.style.backgroundColor = "rgb(255 255 255/ 50%)";
-  toggleIcon.children[0].textContent = "Dark Mode";
-  toggleIcon.children[1].classList.replace("fa-sun", "fa-moon");
-  imageMode("dark");
-}
-
-//Light Mode Style
-function lightMode() {
-  nav.style.backgroundColor = "rgb(255 255 255 / 50%)";
-  textBox.style.backgroundColor = "rgb(0 0 0 / 50%)";
-  toggleIcon.children[0].textContent = "Light Mode";
-  toggleIcon.children[1].classList.replace("fa-moon", "fa-sun");
-  imageMode("light");
+//Dark Mode Style & Light Mode Style
+function toggleDarkLightMode(isLight) {
+  nav.style.backgroundColor = isLight
+    ? "rgb(255 255 255 / 50%)"
+    : "rgb(0 0 0/ 50%)";
+  textBox.style.backgroundColor = isLight
+    ? "rgb(0 0 0 / 50%)"
+    : "rgb(255 255 255/ 50%)";
+  toggleIcon.children[0].textContent = isLight ? "Light Mode" : "Dark Mode";
+  isLight
+    ? toggleIcon.children[1].classList.replace("fa-moon", "fa-sun")
+    : toggleIcon.children[1].classList.replace("fa-sun", "fa-moon");
+  isLight ? imageMode("light") : imageMode("dark");
 }
 
 //Switch Theme Dynamically
 function switchTheme(event) {
   if (event.target.checked) {
     document.documentElement.setAttribute("data-theme", "dark");
-    darkMode();
+    toggleDarkLightMode(false);
+    localStorage.setItem("theme", "dark");
   } else {
     document.documentElement.setAttribute("data-theme", "light");
-    lightMode();
+    toggleDarkLightMode(true);
+    localStorage.setItem("theme", "light");
   }
 }
 
 //Event Listener
 toggleSwitch.addEventListener("change", switchTheme);
+
+//Check Local Storage For Theme
+const currentTheme = localStorage.getItem("theme");
+if (currentTheme) {
+  document.documentElement.setAttribute("data-theme", currentTheme);
+  if (currentTheme === "dark") {
+    toggleSwitch.checked = true;
+    toggleDarkLightMode(false);
+  }
+}
